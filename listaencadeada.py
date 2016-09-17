@@ -8,9 +8,19 @@ class ListaEncadeada:
 
     def insereNo(self,No):
         aux = self.raiz
-        while(aux.proximo!=None):
-            aux = aux.getProximo()
-        aux.setProximo(No)
+        if(aux==None):
+            raiz = No
+        else:
+            while(aux.getProximo() != None):
+                if(aux.getValorX() >= No.getValorX()):
+                    aux.getAnterior().setProximo(No)
+                    No.setAnterior(aux.getAnterior())
+                    No.setProximo(aux)
+                    aux.setAnterior(No)
+                aux = aux.getProximo()
+            if(No.getValorX() > aux.getValorX()):
+                No.setAnterior(aux)
+                aux.setProximo(No)
 
     def imprimeNo(self):
         aux = self.raiz
